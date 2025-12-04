@@ -58,21 +58,33 @@ export default {
                 DEFAULT: {
                     css: {
                         maxWidth: '700px',
-                        color: '#e5e7eb',
+                        color: '#374151', // dark gray for light mode
                         a: {
-                            color: '#8370a0',
+                            color: '#5B4B6F', // primary color
                             '&:hover': {
-                                color: '#b8adca',
+                                color: '#8370a0', // lighter variant on hover
                             },
                         },
-                        h1: { color: '#f9fafb' },
-                        h2: { color: '#f9fafb' },
-                        h3: { color: '#f9fafb' },
-                        h4: { color: '#f9fafb' },
-                        strong: { color: '#f9fafb' },
-                        code: { color: '#8370a0' },
+                        h1: { color: '#111827' },
+                        h2: { color: '#111827' },
+                        h3: { color: '#111827' },
+                        h4: { color: '#111827' },
+                        strong: { color: '#111827' },
+                        code: {
+                            color: '#5B4B6F',
+                            backgroundColor: '#f3f4f6',
+                            padding: '0.2em 0.4em',
+                            borderRadius: '0.25rem',
+                            fontWeight: '600',
+                        },
+                        'code::before': {
+                            content: '""'
+                        },
+                        'code::after': {
+                            content: '""'
+                        },
                         blockquote: {
-                            color: '#d1d5db',
+                            color: '#4b5563',
                             borderLeftColor: '#5B4B6F',
                         },
                     },
