@@ -11,6 +11,7 @@ Before we dive in, the full documentation on the ALM Accelerator can be found he
 
 ## Background
 
+
 I recently went through an exercise of implementing the ALM Accelerator, and thought it would be a good topic to speak about. I have used various different ALM tools within Power Platform, and each provide great benefits depending on various factors, including maturity and resources required.
 
 ALM Accelerator is a great stepping stone between not having any ALM, and going full-blown create-your-own within Github/Azure DevOps. It is relatively easy to set up and offers a comprehensive set of tools to get development teams up and running with best-practices.

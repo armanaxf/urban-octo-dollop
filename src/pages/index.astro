@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('posts'))
@@ -8,23 +9,7 @@ const posts = (await getCollection('posts'))
 ---
 
 <Layout title="Josh Giles">
-  <!-- Hero Section with Gradient -->
-  <section class="mb-16 animate-fade-in">
-    <div class="relative">
-      <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-        <span class="bg-gradient-to-r from-primary-700 via-primary-500 to-primary-300 bg-clip-text text-transparent animate-gradient-shift bg-[length:200%_auto]">
-          Josh Giles
-        </span>
-      </h1>
-      <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 leading-relaxed max-w-2xl">
-        A collection of my thoughts and ramblings on Microsoft's 
-        <span class="text-primary-400 font-semibold">Power Platform</span>
-      </p>
-      
-      <!-- Decorative gradient line -->
-      <div class="mt-8 h-1 w-32 bg-gradient-accent rounded-full"></div>
-    </div>
-  </section>
+  <Hero slot="hero" />
 
   <!-- Recent Posts Section -->
   <section class="animate-slide-up">
@@ -36,50 +21,70 @@ const posts = (await getCollection('posts'))
     <div class="space-y-6">
       {posts.map((post, index) => (
         <article 
-          class="group relative bg-white dark:bg-dark-800/40 backdrop-blur-sm border border-gray-200 dark:border-gray-800/50 rounded-xl p-6 transition-all duration-300 hover:border-primary-600 dark:hover:border-primary-700/50 hover:shadow-xl hover:shadow-primary-600/20 dark:hover:shadow-primary-700/10 hover:-translate-y-1"
+          class="group relative bg-white dark:bg-dark-800/40 backdrop-blur-sm border border-gray-200 dark:border-gray-800/50 rounded-xl overflow-hidden transition-all duration-300 hover:border-primary-600 dark:hover:border-primary-700/50 hover:shadow-xl hover:shadow-primary-600/20 dark:hover:shadow-primary-700/10 hover:-translate-y-1"
           style={`animation-delay: ${index * 100}ms`}
         >
           <!-- Gradient border on hover -->
           <div class="absolute inset-0 rounded-xl bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity duration-300 -z-10"></div>
           
-          <a href={`/posts/${post.slug}`} class="block">
-            <h3 class="text-xl md:text-2xl font-semibold mb-3 text-gray-900 dark:text-gray-100 group-hover:text-primary-700 dark:group-hover:text-primary-400 transition-colors duration-300">
-              {post.data.title}
-            </h3>
-            
-            <div class="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
-              <time datetime={post.data.date.toISOString()} class="flex items-center gap-1">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          <a href={`/posts/${post.slug}`} class="flex flex-col md:flex-row">
+            {/* Image thumbnail */}
+            {post.data.image ? (
+              <div class="md:w-48 lg:w-56 h-48 md:h-auto shrink-0">
+                <img 
+                  src={post.data.image} 
+                  alt={post.data.title}
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            ) : (
+              <div class="md:w-48 lg:w-56 h-48 md:h-auto shrink-0 bg-gradient-to-br from-primary-500/20 to-accent-500/20 flex items-center justify-center">
+                <svg class="w-12 h-12 text-primary-400/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                 </svg>
-                {post.data.date.toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </time>
+              </div>
+            )}
+            
+            {/* Content */}
+            <div class="flex-1 p-6">
+              <h3 class="text-xl md:text-2xl font-semibold mb-3 text-gray-900 dark:text-gray-100 group-hover:text-primary-700 dark:group-hover:text-primary-400 transition-colors duration-300">
+                {post.data.title}
+              </h3>
               
-              {post.data.tags && post.data.tags.length > 0 && (
-                <div class="flex gap-2">
-                  {post.data.tags.slice(0, 2).map(tag => (
-                    <span class="px-2 py-1 text-xs rounded-full bg-primary-100 dark:bg-primary-700/10 text-primary-800 dark:text-primary-400 border border-primary-200 dark:border-primary-700/20">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-            
-            <p class="text-gray-700 dark:text-gray-400 line-clamp-2 leading-relaxed">
-              {post.data.description}
-            </p>
-            
-            <!-- Read more arrow -->
-            <div class="mt-4 flex items-center gap-2 text-primary-700 dark:text-primary-400 font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-2">
-              <span>Read more</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
+              <div class="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
+                <time datetime={post.data.date.toISOString()} class="flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  {post.data.date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </time>
+                
+                {post.data.tags && post.data.tags.length > 0 && (
+                  <div class="flex gap-2">
+                    {post.data.tags.slice(0, 2).map(tag => (
+                      <span class="px-2 py-1 text-xs rounded-full bg-primary-100 dark:bg-primary-700/10 text-primary-800 dark:text-primary-400 border border-primary-200 dark:border-primary-700/20">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
+              <p class="text-gray-700 dark:text-gray-400 line-clamp-2 leading-relaxed">
+                {post.data.description}
+              </p>
+              
+              <!-- Read more arrow -->
+              <div class="mt-4 flex items-center gap-2 text-primary-700 dark:text-primary-400 font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-2">
+                <span>Read more</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
             </div>
           </a>
         </article>

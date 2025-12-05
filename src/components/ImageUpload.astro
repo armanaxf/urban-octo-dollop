@@ -1,0 +1,125 @@
+---
+/**
+ * Image Upload Component using Cloudinary Upload Widget
+ * This component provides a client-side image upload interface
+ */
+export interface Props {
+    onUpload?: string; // Function name to call after upload
+}
+
+const { onUpload = 'handleImageUpload' } = Astro.props;
+const cloudName = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME;
+const uploadPreset = import.meta.env.PUBLIC_CLOUDINARY_UPLOAD_PRESET || 'blog_uploads';
+---
+
+<div class="image-upload-container">
+    <button
+        type="button"
+        id="upload-widget-btn"
+        class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors flex items-center gap-2"
+    >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        Upload Image
+    </button>
+    
+    <div id="uploaded-images" class="mt-4 grid grid-cols-2 gap-4"></div>
+</div>
+
+<script define:vars={{ cloudName, uploadPreset, onUpload }}>
+    // Load Cloudinary Upload Widget script
+    const script = document.createElement('script');
+    script.src = 'https://upload-widget.cloudinary.com/global/all.js';
+    script.onload = initWidget;
+    document.head.appendChild(script);
+
+    function initWidget() {
+        const btn = document.getElementById('upload-widget-btn');
+        const imagesContainer = document.getElementById('uploaded-images');
+        
+        if (!btn || !cloudName) return;
+
+        const widget = cloudinary.createUploadWidget(
+            {
+                cloudName: cloudName,
+                uploadPreset: uploadPreset,
+                sources: ['local', 'url', 'camera'],
+                multiple: true,
+                maxFiles: 10,
+                maxFileSize: 10000000, // 10MB
+                resourceType: 'image',
+                folder: 'blog',
+                styles: {
+                    palette: {
+                        window: '#1a1f2e',
+                        sourceBg: '#0f1419',
+                        windowBorder: '#5B4B6F',
+                        tabIcon: '#8370a0',
+                        inactiveTabIcon: '#6b7280',
+                        menuIcons: '#8370a0',
+                        link: '#8370a0',
+                        action: '#5B4B6F',
+                        inProgress: '#5B4B6F',
+                        complete: '#22c55e',
+                        error: '#ef4444',
+                        textDark: '#111827',
+                        textLight: '#f9fafb'
+                    }
+                }
+            },
+            (error, result) => {
+                if (!error && result && result.event === 'success') {
+                    const info = result.info;
+                    const imageId = 'img-' + Date.now();
+                    
+                    // Display uploaded image with editable alt text
+                    const imgDiv = document.createElement('div');
+                    imgDiv.className = 'relative bg-gray-100 dark:bg-dark-700 rounded-lg p-3';
+                    imgDiv.innerHTML = `
+                        <img src="${info.secure_url}" alt="${info.original_filename}" class="w-full h-32 object-cover rounded-lg mb-2" />
+                        <input 
+                            type="text" 
+                            id="${imageId}"
+                            value="${info.original_filename}"
+                            placeholder="Enter image description for accessibility"
+                            class="w-full px-2 py-1 text-xs rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 mb-2"
+                        />
+                        <div class="flex gap-2">
+                            <button type="button" class="copy-url flex-1 px-2 py-1 bg-gray-500 text-white text-xs rounded hover:bg-gray-600 transition-colors" data-url="${info.secure_url}">
+                                Copy URL
+                            </button>
+                            <button type="button" class="copy-markdown flex-1 px-2 py-1 bg-primary-600 text-white text-xs rounded hover:bg-primary-700 transition-colors" data-url="${info.secure_url}" data-alt-input="${imageId}">
+                                Copy Markdown
+                            </button>
+                        </div>
+                    `;
+                    imagesContainer.appendChild(imgDiv);
+                    
+                    // Add click handlers
+                    imgDiv.querySelector('.copy-url').addEventListener('click', (e) => {
+                        navigator.clipboard.writeText(e.target.dataset.url);
+                        e.target.textContent = 'Copied!';
+                        setTimeout(() => e.target.textContent = 'Copy URL', 1500);
+                    });
+                    
+                    imgDiv.querySelector('.copy-markdown').addEventListener('click', (e) => {
+                        const altInput = document.getElementById(e.target.dataset.altInput);
+                        const altText = altInput ? altInput.value : 'Image';
+                        const md = `![${altText}](${e.target.dataset.url})`;
+                        navigator.clipboard.writeText(md);
+                        e.target.textContent = 'Copied!';
+                        setTimeout(() => e.target.textContent = 'Copy Markdown', 1500);
+                    });
+                    
+                    // Call custom handler if defined
+                    if (window[onUpload]) {
+                        window[onUpload](info);
+                    }
+                }
+            }
+        );
+
+        btn.addEventListener('click', () => widget.open());
+    }
+</script>

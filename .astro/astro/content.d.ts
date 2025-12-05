@@ -183,6 +183,27 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
+"understanding-service-connections-for-environments-in-power-platform-build-tools.md": {
+	id: "understanding-service-connections-for-environments-in-power-platform-build-tools.md";
+  slug: "understanding-service-connections-for-environments-in-power-platform-build-tools";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"update-org-settings-in-power-platform-build-tools.md": {
+	id: "update-org-settings-in-power-platform-build-tools.md";
+  slug: "update-org-settings-in-power-platform-build-tools";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"use-the-set-solution-version-task-power-platform-build-tools-task-in-azure-devops.md": {
+	id: "use-the-set-solution-version-task-power-platform-build-tools-task-in-azure-devops.md";
+  slug: "use-the-set-solution-version-task-power-platform-build-tools-task-in-azure-devops";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
 };
 
 	};

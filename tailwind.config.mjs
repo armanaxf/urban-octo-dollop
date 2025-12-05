@@ -39,6 +39,7 @@ export default {
                 'fade-in': 'fadeIn 0.6s ease-out',
                 'slide-up': 'slideUp 0.6s ease-out',
                 'gradient-shift': 'gradientShift 8s ease infinite',
+                'blob': 'blob 7s infinite',
             },
             keyframes: {
                 fadeIn: {
@@ -52,6 +53,12 @@ export default {
                 gradientShift: {
                     '0%, 100%': { backgroundPosition: '0% 50%' },
                     '50%': { backgroundPosition: '100% 50%' },
+                },
+                blob: {
+                    '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                    '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                    '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                    '100%': { transform: 'translate(0px, 0px) scale(1)' },
                 },
             },
             typography: {
@@ -86,6 +93,39 @@ export default {
                         blockquote: {
                             color: '#4b5563',
                             borderLeftColor: '#5B4B6F',
+                        },
+                    },
+                },
+                invert: {
+                    css: {
+                        color: '#e5e7eb', // light gray for dark mode
+                        a: {
+                            color: '#b8adca', // lighter primary for dark mode
+                            '&:hover': {
+                                color: '#d3cce0',
+                            },
+                        },
+                        h1: { color: '#f9fafb' },
+                        h2: { color: '#f9fafb' },
+                        h3: { color: '#f3f4f6' },
+                        h4: { color: '#f3f4f6' },
+                        strong: { color: '#f9fafb' },
+                        code: {
+                            color: '#b8adca',
+                            backgroundColor: '#252b3d',
+                        },
+                        blockquote: {
+                            color: '#d1d5db',
+                            borderLeftColor: '#8370a0',
+                        },
+                        hr: {
+                            borderColor: '#374151',
+                        },
+                        'ul > li::marker': {
+                            color: '#9ca3af',
+                        },
+                        'ol > li::marker': {
+                            color: '#9ca3af',
                         },
                     },
                 },
