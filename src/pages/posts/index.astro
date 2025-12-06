@@ -3,9 +3,9 @@ import Layout from '../../layouts/Layout.astro';
 import { getPosts } from '../../lib/content';
 
 const allPosts = await getPosts();
-const posts = allPosts.sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-);
+const posts = allPosts
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <Layout title="All Posts | Josh Giles">
