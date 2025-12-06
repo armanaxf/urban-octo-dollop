@@ -27,6 +27,7 @@ if (Astro.request.method === 'POST') {
         const tags = formData.get('tags')?.toString() || '';
         const content = formData.get('content')?.toString() || '';
         const dateStr = formData.get('date')?.toString() || '';
+        const heroImage = formData.get('heroImage')?.toString() || '';
 
         // Format tags array
         const tagsArray = tags
@@ -36,14 +37,19 @@ if (Astro.request.method === 'POST') {
 
         const draft = formData.get('draft') === 'on';
 
-        // Create frontmatter
-        const frontmatter = `---
+        // Create frontmatter with optional image
+        let frontmatter = `---
 title: "${title.replace(/"/g, '\\"')}"
 description: "${description.replace(/"/g, '\\"')}"
 date: ${dateStr}
 tags: [${tagsArray.map(t => `"${t}"`).join(', ')}]
-draft: ${draft}
----
+draft: ${draft}`;
+
+        if (heroImage) {
+            frontmatter += `\nimage: "${heroImage}"`;
+        }
+
+        frontmatter += `\n---
 
 ${content}`;
 
@@ -67,6 +73,9 @@ const body = bodyMatch ? bodyMatch[1].trim() : '';
 
 // Format date for input
 const dateValue = post.data.date.toISOString().split('T')[0];
+
+// Get existing hero image
+const existingImage = post.data.image || '';
 ---
 
 <Layout title={`Edit: ${post.data.title} - Admin`}>
@@ -144,6 +153,29 @@ const dateValue = post.data.date.toISOString().split('T')[0];
                 </div>
             </div>
 
+            <!-- Hero Image Field -->
+            <div>
+                <label for="heroImage" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Hero Image URL
+                </label>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                    This image will be displayed at the top of your post and as a preview thumbnail
+                </p>
+                <div class="flex gap-2">
+                    <input
+                        type="url"
+                        id="heroImage"
+                        name="heroImage"
+                        value={existingImage}
+                        class="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
+                        placeholder="https://res.cloudinary.com/..."
+                    />
+                </div>
+                <div id="heroPreview" class={existingImage ? "mt-3" : "mt-3 hidden"}>
+                    <img id="heroPreviewImg" src={existingImage} alt="Hero preview" class="max-h-40 rounded-lg border border-gray-200 dark:border-gray-700" />
+                </div>
+            </div>
+
             <div>
                 <label class="flex items-center gap-3 p-4 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800/50 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                     <input
@@ -163,25 +195,43 @@ const dateValue = post.data.date.toISOString().split('T')[0];
             <!-- Image Upload Section -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Images
+                    Upload Images
                 </label>
                 <p class="text-xs text-gray-500 dark:text-gray-400 mb-3">
-                    Upload images and copy the markdown to paste into your content
+                    Upload images and copy the markdown or URL to use
                 </p>
                 <ImageUpload />
             </div>
 
+            <!-- Content with Preview Toggle -->
             <div>
-                <label for="content" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Content (Markdown)
-                </label>
-                <textarea
-                    id="content"
-                    name="content"
-                    required
-                    rows="20"
-                    class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 font-mono text-sm"
-                >{body}</textarea>
+                <div class="flex items-center justify-between mb-2">
+                    <label for="content" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Content (Markdown)
+                    </label>
+                    <button
+                        type="button"
+                        id="previewToggle"
+                        class="px-3 py-1 text-sm font-medium text-primary-600 dark:text-primary-400 border border-primary-300 dark:border-primary-700 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
+                    >
+                        Preview
+                    </button>
+                </div>
+                <div id="editorContainer">
+                    <textarea
+                        id="content"
+                        name="content"
+                        required
+                        rows="20"
+                        class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 font-mono text-sm"
+                    >{body}</textarea>
+                </div>
+                <div id="previewContainer" class="hidden">
+                    <div 
+                        id="previewContent" 
+                        class="w-full min-h-[500px] px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-gray-100 prose dark:prose-invert max-w-none overflow-auto"
+                    ></div>
+                </div>
             </div>
         </div>
 
@@ -208,3 +258,55 @@ const dateValue = post.data.date.toISOString().split('T')[0];
         </div>
     </form>
 </Layout>
+
+<script>
+    // Hero image preview
+    const heroInput = document.getElementById('heroImage') as HTMLInputElement;
+    const heroPreview = document.getElementById('heroPreview');
+    const heroPreviewImg = document.getElementById('heroPreviewImg') as HTMLImageElement;
+
+    heroInput?.addEventListener('input', () => {
+        const url = heroInput.value.trim();
+        if (url && heroPreview && heroPreviewImg) {
+            heroPreviewImg.src = url;
+            heroPreview.classList.remove('hidden');
+            heroPreviewImg.onerror = () => heroPreview.classList.add('hidden');
+        } else if (heroPreview) {
+            heroPreview.classList.add('hidden');
+        }
+    });
+
+    // Markdown preview toggle
+    const previewToggle = document.getElementById('previewToggle');
+    const editorContainer = document.getElementById('editorContainer');
+    const previewContainer = document.getElementById('previewContainer');
+    const previewContent = document.getElementById('previewContent');
+    const contentTextarea = document.getElementById('content') as HTMLTextAreaElement;
+
+    let isPreview = false;
+
+    previewToggle?.addEventListener('click', async () => {
+        isPreview = !isPreview;
+        
+        if (isPreview && previewToggle && editorContainer && previewContainer && previewContent && contentTextarea) {
+            // Load marked.js from CDN if not already loaded
+            if (!(window as any).marked) {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
+                document.head.appendChild(script);
+                await new Promise(resolve => script.onload = resolve);
+            }
+            
+            // Render markdown
+            previewContent.innerHTML = (window as any).marked.parse(contentTextarea.value);
+            
+            editorContainer.classList.add('hidden');
+            previewContainer.classList.remove('hidden');
+            previewToggle.textContent = 'Edit';
+        } else if (previewToggle && editorContainer && previewContainer) {
+            editorContainer.classList.remove('hidden');
+            previewContainer.classList.add('hidden');
+            previewToggle.textContent = 'Preview';
+        }
+    });
+</script>
