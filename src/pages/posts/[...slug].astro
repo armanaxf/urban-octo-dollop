@@ -1,17 +1,20 @@
 ---
-import { getCollection } from 'astro:content';
+import { getPostBySlug } from '../../lib/content';
 import Layout from '../../layouts/Layout.astro';
 import Comments from '../../components/Comments.astro';
 
-export async function getStaticPaths() {
-  const posts = await getCollection('posts');
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+const { slug } = Astro.params;
+if (!slug) return Astro.redirect('/404');
+
+const post = await getPostBySlug(slug);
+
+if (!post) return Astro.redirect('/404');
+
+// Check if draft and user is not logged in
+if (post.data.draft && !Astro.locals.session) {
+    return Astro.redirect('/404');
 }
 
-const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 

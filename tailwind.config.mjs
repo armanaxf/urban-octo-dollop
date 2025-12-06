@@ -27,6 +27,8 @@ export default {
                     purple: '#5B4B6F', // Your primary color
                     light: '#8370a0',  // Lighter variant
                     dark: '#3a2f4a',   // Darker variant
+                    500: '#8370a0',
+                    600: '#6f5d85',
                 }
             },
             backgroundImage: {

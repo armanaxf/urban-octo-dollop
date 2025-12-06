@@ -48,8 +48,13 @@ const posts = (await getCollection('posts'))
                 {posts.map((post) => (
                     <tr class="hover:bg-gray-50 dark:hover:bg-dark-700/50 transition-colors">
                         <td class="px-6 py-4">
-                            <a href={`/posts/${post.slug}`} class="text-gray-900 dark:text-gray-100 font-medium hover:text-primary-500 transition-colors">
+                            <a href={`/posts/${post.slug}`} class="text-gray-900 dark:text-gray-100 font-medium hover:text-primary-500 transition-colors flex items-center gap-2">
                                 {post.data.title}
+                                {post.data.draft && (
+                                    <span class="px-2 py-0.5 text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300 rounded-full border border-yellow-200 dark:border-yellow-900/50">
+                                        Draft
+                                    </span>
+                                )}
                             </a>
                             <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-1">
                                 {post.data.description}

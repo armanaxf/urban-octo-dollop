@@ -4,6 +4,7 @@ import Hero from '../components/Hero.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('posts'))
+  .filter(post => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 5);
 ---

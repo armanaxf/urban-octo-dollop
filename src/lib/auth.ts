@@ -54,3 +54,37 @@ export function verifyPassword(password: string): boolean {
     const adminPassword = import.meta.env.ADMIN_PASSWORD || 'admin';
     return password === adminPassword;
 }
+
+// Simple in-memory rate limiting
+// Note: This resets on server restart/function cold start, which is fine for this use case
+const rateLimitMap = new Map<string, { count: number; lastAttempt: number }>();
+
+export function checkRateLimit(ip: string): { allowed: boolean; waitTime?: number } {
+    const now = Date.now();
+    const windowMs = 15 * 60 * 1000; // 15 minutes
+    const maxAttempts = 5;
+
+    const record = rateLimitMap.get(ip);
+
+    if (!record) {
+        rateLimitMap.set(ip, { count: 1, lastAttempt: now });
+        return { allowed: true };
+    }
+
+    // Clean up old record if window passed
+    if (now - record.lastAttempt > windowMs) {
+        rateLimitMap.set(ip, { count: 1, lastAttempt: now });
+        return { allowed: true };
+    }
+
+    // Check attempts
+    if (record.count >= maxAttempts) {
+        const remainingTime = Math.ceil((windowMs - (now - record.lastAttempt)) / 1000 / 60);
+        return { allowed: false, waitTime: remainingTime };
+    }
+
+    // Increment count
+    record.count++;
+    record.lastAttempt = now;
+    return { allowed: true };
+}

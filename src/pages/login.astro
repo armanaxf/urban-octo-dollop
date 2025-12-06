@@ -2,31 +2,38 @@
 export const prerender = false;
 
 import Layout from '../layouts/Layout.astro';
-import { verifyPassword, createSessionToken } from '../lib/auth';
+import { verifyPassword, createSessionToken, checkRateLimit } from '../lib/auth';
 
 let error = '';
 
 if (Astro.request.method === 'POST') {
-    const formData = await Astro.request.formData();
-    const password = formData.get('password')?.toString() || '';
+    const clientIp = Astro.clientAddress;
+    const rateLimit = checkRateLimit(clientIp);
 
-    if (verifyPassword(password)) {
-        const token = createSessionToken({
-            username: 'admin',
-            createdAt: Date.now(),
-        });
-
-        Astro.cookies.set('session', token, {
-            httpOnly: true,
-            secure: import.meta.env.PROD,
-            sameSite: 'lax',
-            path: '/',
-            maxAge: 60 * 60 * 24, // 24 hours
-        });
-
-        return Astro.redirect('/admin');
+    if (!rateLimit.allowed) {
+        error = `Too many attempts. Please try again in ${rateLimit.waitTime} minutes.`;
     } else {
-        error = 'Invalid password';
+        const formData = await Astro.request.formData();
+        const password = formData.get('password')?.toString() || '';
+
+        if (verifyPassword(password)) {
+            const token = createSessionToken({
+                username: 'admin',
+                createdAt: Date.now(),
+            });
+
+            Astro.cookies.set('session', token, {
+                httpOnly: true,
+                secure: import.meta.env.PROD,
+                sameSite: 'lax',
+                path: '/',
+                maxAge: 60 * 60 * 24, // 24 hours
+            });
+
+            return Astro.redirect('/admin');
+        } else {
+            error = 'Invalid password';
+        }
     }
 }
 
