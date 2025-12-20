@@ -46,10 +46,10 @@ const umamiScriptUrl = import.meta.env.PUBLIC_UMAMI_SCRIPT_URL || 'https://analy
 
 		<title>{title}</title>
 
-		<!-- Google Fonts - Inter -->
+		<!-- Google Fonts - Inter + Caveat (script font) -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
 		<!-- Umami Analytics -->
 		{umamiWebsiteId && (
@@ -60,7 +60,7 @@ const umamiScriptUrl = import.meta.env.PUBLIC_UMAMI_SCRIPT_URL || 'https://analy
 			></script>
 		)}
 	</head>
-	<body class="bg-slate-900 text-gray-300 min-h-screen flex flex-col font-sans antialiased">
+	<body class="bg-white text-warm-800 min-h-screen flex flex-col font-sans antialiased">
 		<Header />
 
 		<slot name="hero" />
@@ -72,6 +72,6 @@ const umamiScriptUrl = import.meta.env.PUBLIC_UMAMI_SCRIPT_URL || 'https://analy
 		<Footer />
 
 		<!-- Buy Me a Coffee Widget -->
-		<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="joshlgiles" data-description="Support me on Buy me a coffee!" data-message="Thanks for visiting! If you found my content helpful, consider buying me a coffee" data-color="#e5a03b" data-position="Right" data-x_margin="18" data-y_margin="48"></script>
+		<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="joshlgiles" data-description="Support me on Buy me a coffee!" data-message="Thanks for visiting! If you found my content helpful, consider buying me a coffee" data-color="#FF914D" data-position="Right" data-x_margin="18" data-y_margin="48"></script>
 	</body>
 </html>

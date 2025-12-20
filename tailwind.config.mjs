@@ -1,72 +1,64 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    darkMode: 'class',
     content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
     theme: {
         extend: {
             colors: {
-                // New dark slate palette (inspired by the reference design)
-                slate: {
-                    950: '#0f0f17',
-                    900: '#13131d',
-                    850: '#181824',
-                    800: '#1e1e2e',
-                    750: '#232334',
-                    700: '#2a2a3d',
-                    600: '#363649',
-                    500: '#4a4a5e',
+                // Coral/Orange monochromatic palette based on #FF914D
+                coral: {
+                    50: '#FFF8F5',
+                    100: '#FFEDE5',
+                    200: '#FFD9C7',
+                    300: '#FFC4A8',
+                    400: '#FFA77A',
+                    500: '#FF914D', // Primary
+                    600: '#FF7A2E',
+                    700: '#E86520',
+                    800: '#C45318',
+                    900: '#9E4315',
+                    950: '#5C2308',
                 },
-                // Amber/Gold accent color
-                amber: {
-                    DEFAULT: '#e5a03b',
-                    50: '#fef9ec',
-                    100: '#fcefc9',
-                    200: '#f9de8e',
-                    300: '#f5c854',
-                    400: '#f2b42a',
-                    500: '#e5a03b',
-                    600: '#ca7a14',
-                    700: '#a85814',
-                    800: '#894517',
-                    900: '#713916',
+                // Neutral warm grays for text and backgrounds
+                warm: {
+                    50: '#FDFCFB',
+                    100: '#F9F6F3',
+                    200: '#F0EBE5',
+                    300: '#E5DED5',
+                    400: '#C9BFB3',
+                    500: '#A99D8F',
+                    600: '#857969',
+                    700: '#635850',
+                    800: '#433B35',
+                    900: '#2A2522',
                 },
-                // Keep some legacy colors for compatibility
-                dark: {
-                    900: '#0f0f17',
-                    800: '#1e1e2e',
-                    700: '#2a2a3d',
-                    600: '#363649',
-                },
+                // Keep primary as coral for consistency
                 primary: {
-                    DEFAULT: '#e5a03b',
-                    900: '#713916',
-                    800: '#894517',
-                    700: '#a85814',
-                    600: '#ca7a14',
-                    500: '#e5a03b',
-                    400: '#f2b42a',
-                    300: '#f5c854',
-                    200: '#f9de8e',
-                    100: '#fef9ec',
+                    DEFAULT: '#FF914D',
+                    50: '#FFF8F5',
+                    100: '#FFEDE5',
+                    200: '#FFD9C7',
+                    300: '#FFC4A8',
+                    400: '#FFA77A',
+                    500: '#FF914D',
+                    600: '#FF7A2E',
+                    700: '#E86520',
+                    800: '#C45318',
+                    900: '#9E4315',
                 },
             },
             fontFamily: {
-                sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-                display: ['Inter', 'system-ui', 'sans-serif'],
+                sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                script: ['Caveat', 'cursive'],
             },
             backgroundImage: {
-                'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                'gradient-dark': 'linear-gradient(135deg, #13131d 0%, #1e1e2e 50%, #232334 100%)',
-                'gradient-amber': 'linear-gradient(135deg, #e5a03b 0%, #f2b42a 50%, #f5c854 100%)',
-                'gradient-card': 'linear-gradient(145deg, #1e1e2e 0%, #232334 100%)',
+                'gradient-coral': 'linear-gradient(135deg, #FF914D 0%, #FFA77A 50%, #FFC4A8 100%)',
             },
             animation: {
                 'fade-in': 'fadeIn 0.6s ease-out',
                 'slide-up': 'slideUp 0.6s ease-out',
                 'slide-in-left': 'slideInLeft 0.6s ease-out',
-                'gradient-shift': 'gradientShift 8s ease infinite',
                 'float': 'float 6s ease-in-out infinite',
-                'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'wiggle': 'wiggle 3s ease-in-out infinite',
             },
             keyframes: {
                 fadeIn: {
@@ -81,93 +73,50 @@ export default {
                     '0%': { transform: 'translateX(-20px)', opacity: '0' },
                     '100%': { transform: 'translateX(0)', opacity: '1' },
                 },
-                gradientShift: {
-                    '0%, 100%': { backgroundPosition: '0% 50%' },
-                    '50%': { backgroundPosition: '100% 50%' },
-                },
                 float: {
                     '0%, 100%': { transform: 'translateY(0)' },
                     '50%': { transform: 'translateY(-10px)' },
+                },
+                wiggle: {
+                    '0%, 100%': { transform: 'rotate(-2deg)' },
+                    '50%': { transform: 'rotate(2deg)' },
                 },
             },
             typography: {
                 DEFAULT: {
                     css: {
                         maxWidth: '700px',
-                        color: '#9ca3af',
+                        color: '#433B35',
                         a: {
-                            color: '#e5a03b',
+                            color: '#FF914D',
                             '&:hover': {
-                                color: '#f2b42a',
+                                color: '#E86520',
                             },
                         },
-                        h1: { color: '#f9fafb' },
-                        h2: { color: '#f9fafb' },
-                        h3: { color: '#f3f4f6' },
-                        h4: { color: '#f3f4f6' },
-                        strong: { color: '#f9fafb' },
+                        h1: { color: '#2A2522' },
+                        h2: { color: '#2A2522' },
+                        h3: { color: '#433B35' },
+                        h4: { color: '#433B35' },
+                        strong: { color: '#2A2522' },
                         code: {
-                            color: '#e5a03b',
-                            backgroundColor: '#2a2a3d',
+                            color: '#FF914D',
+                            backgroundColor: '#FFF8F5',
                             padding: '0.2em 0.4em',
                             borderRadius: '0.25rem',
                             fontWeight: '600',
                         },
-                        'code::before': {
-                            content: '""'
-                        },
-                        'code::after': {
-                            content: '""'
-                        },
+                        'code::before': { content: '""' },
+                        'code::after': { content: '""' },
                         blockquote: {
-                            color: '#d1d5db',
-                            borderLeftColor: '#e5a03b',
+                            color: '#635850',
+                            borderLeftColor: '#FF914D',
                         },
-                        hr: {
-                            borderColor: '#363649',
-                        },
-                        'ul > li::marker': {
-                            color: '#e5a03b',
-                        },
-                        'ol > li::marker': {
-                            color: '#e5a03b',
-                        },
+                        hr: { borderColor: '#E5DED5' },
+                        'ul > li::marker': { color: '#FF914D' },
+                        'ol > li::marker': { color: '#FF914D' },
                         pre: {
-                            backgroundColor: '#13131d',
-                            borderRadius: '0.5rem',
-                        },
-                    },
-                },
-                invert: {
-                    css: {
-                        color: '#9ca3af',
-                        a: {
-                            color: '#e5a03b',
-                            '&:hover': {
-                                color: '#f2b42a',
-                            },
-                        },
-                        h1: { color: '#f9fafb' },
-                        h2: { color: '#f9fafb' },
-                        h3: { color: '#f3f4f6' },
-                        h4: { color: '#f3f4f6' },
-                        strong: { color: '#f9fafb' },
-                        code: {
-                            color: '#e5a03b',
-                            backgroundColor: '#2a2a3d',
-                        },
-                        blockquote: {
-                            color: '#d1d5db',
-                            borderLeftColor: '#e5a03b',
-                        },
-                        hr: {
-                            borderColor: '#363649',
-                        },
-                        'ul > li::marker': {
-                            color: '#e5a03b',
-                        },
-                        'ol > li::marker': {
-                            color: '#e5a03b',
+                            backgroundColor: '#2A2522',
+                            borderRadius: '0.75rem',
                         },
                     },
                 },

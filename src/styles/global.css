@@ -4,10 +4,11 @@
 
 @layer base {
   :root {
-    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    --color-amber: #e5a03b;
-    --color-slate-800: #1e1e2e;
-    --color-slate-900: #13131d;
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-script: 'Caveat', cursive;
+    --color-coral: #FF914D;
+    --color-coral-light: #FFD9C7;
+    --color-warm-900: #2A2522;
   }
 
   html {
@@ -15,106 +16,150 @@
     scroll-behavior: smooth;
   }
 
-  /* Always dark mode - freelancer aesthetic */
+  /* Light mode - friendly freelancer aesthetic */
   body {
-    @apply bg-slate-900 text-gray-300 transition-colors duration-300;
+    @apply bg-white text-warm-800 transition-colors duration-300;
   }
 
-  /* Custom scrollbar for dark theme */
+  /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-slate-900;
+    @apply bg-warm-100;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-600 rounded-full;
+    @apply bg-coral-300 rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-slate-500;
+    @apply bg-coral-400;
   }
 
   /* Selection color */
   ::selection {
-    @apply bg-amber-500/30 text-amber-100;
+    @apply bg-coral-200 text-coral-900;
   }
 }
 
 @layer components {
+  /* Buttons */
   .btn-primary {
-    @apply px-6 py-3 bg-amber-500 text-slate-900 font-semibold rounded-lg hover:bg-amber-400 transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg hover:shadow-amber-500/25;
+    @apply px-6 py-3 bg-coral-500 text-white font-semibold rounded-full hover:bg-coral-600 transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg hover:shadow-coral-500/25;
   }
 
   .btn-secondary {
-    @apply px-6 py-3 bg-transparent text-gray-300 font-semibold rounded-lg border border-slate-600 hover:border-amber-500 hover:text-amber-500 transition-all duration-300;
+    @apply px-6 py-3 bg-transparent text-warm-800 font-semibold rounded-full border-2 border-warm-300 hover:border-coral-500 hover:text-coral-500 transition-all duration-300;
   }
 
   .btn-ghost {
-    @apply px-4 py-2 text-gray-400 hover:text-amber-500 transition-colors duration-300;
+    @apply px-4 py-2 text-warm-600 hover:text-coral-500 transition-colors duration-300;
   }
 
+  /* Cards */
   .card {
-    @apply bg-slate-800 rounded-xl border border-slate-700/50 shadow-lg transition-all duration-300 hover:border-slate-600;
+    @apply bg-white rounded-2xl border border-warm-200 shadow-sm transition-all duration-300 hover:shadow-md hover:border-coral-200;
   }
 
   .card-hover {
-    @apply hover:shadow-xl hover:shadow-amber-500/5 hover:-translate-y-1;
+    @apply hover:shadow-xl hover:shadow-coral-500/10 hover:-translate-y-1;
   }
 
+  /* Section styling */
   .section-label {
-    @apply text-xs uppercase tracking-widest text-gray-500 font-medium mb-2;
+    @apply text-xs uppercase tracking-widest text-warm-500 font-medium;
   }
 
   .heading-display {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight;
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-warm-900 leading-tight;
   }
 
-  .text-amber-link {
-    @apply text-amber-500 hover:text-amber-400 transition-colors duration-200 inline-flex items-center gap-1;
+  /* Links */
+  .text-coral-link {
+    @apply text-coral-500 hover:text-coral-600 transition-colors duration-200 inline-flex items-center gap-1 font-medium;
   }
 
+  /* Navigation */
   .nav-link {
-    @apply text-gray-400 hover:text-white transition-colors duration-200 text-sm font-medium;
+    @apply text-warm-600 hover:text-coral-500 transition-colors duration-200 text-sm font-medium;
   }
 
   .nav-link-active {
-    @apply text-amber-500;
+    @apply text-coral-500;
   }
 
-  /* Service card style from reference */
+  /* Service card - vertical style */
   .service-card {
-    @apply bg-slate-800 border border-slate-700/50 rounded-xl p-6 transition-all duration-300 hover:border-amber-500/50 group;
+    @apply flex items-center gap-4 p-4 rounded-xl transition-all duration-300 hover:bg-coral-50 group;
   }
 
-  .service-card-featured {
-    @apply bg-amber-500 text-slate-900 border-amber-500;
+  .service-icon {
+    @apply w-12 h-12 rounded-xl flex items-center justify-center bg-coral-100 text-coral-500 group-hover:bg-coral-500 group-hover:text-white transition-all duration-300;
   }
 
   /* Stats styling */
   .stat-number {
-    @apply text-4xl md:text-5xl font-bold text-amber-500;
+    @apply text-4xl md:text-5xl font-bold text-coral-500;
   }
 
   .stat-label {
-    @apply text-sm text-gray-500 uppercase tracking-wide;
+    @apply text-sm text-warm-500;
+  }
+
+  /* Brush stroke decoration */
+  .brush-stroke {
+    position: relative;
+  }
+
+  .brush-stroke::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -5%;
+    right: -5%;
+    height: 40%;
+    background: linear-gradient(90deg, transparent, #FFD9C7 20%, #FFD9C7 80%, transparent);
+    z-index: -1;
+    border-radius: 50%;
+    transform: rotate(-2deg);
+  }
+
+  /* Photo frame with brush stroke */
+  .photo-frame {
+    position: relative;
+  }
+
+  .photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 100 Q60 40 100 50 T160 100 T100 150 T40 100' fill='%23FFD9C7'/%3E%3C/svg%3E") no-repeat center;
+    background-size: contain;
+    z-index: -1;
+    transform: rotate(-5deg);
   }
 }
 
 @layer utilities {
-  .bg-gradient-brand {
-    @apply bg-gradient-to-r from-amber-500 to-amber-400;
+  /* Gradients */
+  .bg-gradient-coral {
+    @apply bg-gradient-to-r from-coral-500 to-coral-400;
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-amber-300;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-coral-500 to-coral-600;
   }
 
-  .text-gradient-white {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400;
+  /* Backgrounds */
+  .bg-warm {
+    @apply bg-warm-50;
+  }
+
+  .bg-warm-alt {
+    @apply bg-warm-100;
   }
 
   /* Animation utilities */
@@ -152,12 +197,8 @@
     to { opacity: 1; transform: translateX(0); }
   }
 
-  /* Glow effects */
-  .glow-amber {
-    box-shadow: 0 0 40px rgba(229, 160, 59, 0.15);
-  }
-
-  .glow-amber-strong {
-    box-shadow: 0 0 60px rgba(229, 160, 59, 0.25);
+  /* Decorative shapes */
+  .blob-coral {
+    background: radial-gradient(circle, #FFD9C7 0%, transparent 70%);
   }
 }
