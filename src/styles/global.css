@@ -93,11 +93,15 @@
 
   /* Service card - vertical style */
   .service-card {
-    @apply flex items-center gap-4 p-4 rounded-xl transition-all duration-300 hover:bg-coral-50 group;
+    @apply flex items-center gap-4 p-4 rounded-xl transition-all duration-300 hover:bg-coral-50;
   }
 
-  .service-icon {
-    @apply w-12 h-12 rounded-xl flex items-center justify-center bg-coral-100 text-coral-500 group-hover:bg-coral-500 group-hover:text-white transition-all duration-300;
+  .service-card .service-icon {
+    @apply w-12 h-12 rounded-xl flex items-center justify-center bg-coral-100 text-coral-500 transition-all duration-300;
+  }
+
+  .service-card:hover .service-icon {
+    @apply bg-coral-500 text-white;
   }
 
   /* Stats styling */
