@@ -18,25 +18,33 @@ if (post.data.draft && !Astro.locals.session) {
 const { Content } = await post.render();
 ---
 
-<Layout title={post.data.title} description={post.data.description}>
+<Layout title={`${post.data.title} | Josh Giles`} description={post.data.description}>
   <article class="animate-fade-in">
-    {/* Hero Image */}
+    <!-- Back link -->
+    <a
+      href="/posts"
+      class="inline-flex items-center gap-2 text-gray-500 hover:text-amber-500 transition-colors mb-8 group"
+    >
+      <svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      Back to posts
+    </a>
+
+    <!-- Hero Image -->
     {post.data.image && (
-      <div class="mb-8 rounded-xl overflow-hidden shadow-lg">
-        <img 
-          src={post.data.image} 
+      <div class="mb-8 rounded-xl overflow-hidden">
+        <img
+          src={post.data.image}
           alt={post.data.title}
           class="w-full h-64 md:h-96 object-cover"
         />
       </div>
     )}
-    
+
     <!-- Header -->
-    <header class="mb-12 bg-white dark:bg-dark-800/40 backdrop-blur-sm border border-gray-200 dark:border-gray-800/50 rounded-xl p-8">
-      <div class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400 mb-4">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
+    <header class="mb-10">
+      <div class="flex items-center gap-3 text-sm text-gray-500 mb-4">
         <time datetime={post.data.date.toISOString()}>
           {post.data.date.toLocaleDateString('en-US', {
             year: 'numeric',
@@ -45,41 +53,70 @@ const { Content } = await post.render();
           })}
         </time>
       </div>
-      
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
-        <span class="bg-gradient-to-r from-primary-700 via-primary-500 to-primary-300 bg-clip-text text-transparent">
-          {post.data.title}
-        </span>
+
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+        {post.data.title}
       </h1>
-      
+
+      <!-- Tags -->
       <div class="flex flex-wrap gap-2">
         {post.data.tags.map((tag) => (
-          <span class="text-xs bg-primary-100 dark:bg-primary-700/10 text-primary-800 dark:text-primary-400 px-3 py-1.5 rounded-full border border-primary-200 dark:border-primary-700/20">
+          <span class="text-xs px-3 py-1 rounded-full bg-slate-700/50 text-amber-500 border border-amber-500/20">
             #{tag}
           </span>
         ))}
       </div>
     </header>
-    
+
     <!-- Content -->
-    <div class="prose prose-lg max-w-none bg-white dark:bg-dark-800/20 backdrop-blur-sm border border-gray-200 dark:border-gray-800/30 rounded-xl p-8 md:p-12 dark:prose-invert">
-      <Content />
+    <div class="bg-slate-800 rounded-xl border border-slate-700/50 p-6 md:p-10">
+      <div class="prose prose-lg max-w-none prose-invert prose-headings:text-white prose-a:text-amber-500 hover:prose-a:text-amber-400 prose-code:text-amber-400 prose-pre:bg-slate-900 prose-pre:border prose-pre:border-slate-700">
+        <Content />
+      </div>
     </div>
-    
-    <!-- Back to Posts Link -->
-    <div class="mt-12 text-center">
-      <a 
-        href="/posts" 
-        class="inline-flex items-center gap-2 text-gray-700 dark:text-gray-400 hover:text-primary-700 dark:hover:text-primary-400 transition-all duration-300 group"
+
+    <!-- Share / Navigation -->
+    <div class="mt-12 pt-8 border-t border-slate-700/50 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <a
+        href="/posts"
+        class="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
       >
         <svg class="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
-        Back to all posts
+        More posts
       </a>
+
+      <div class="flex items-center gap-4">
+        <span class="text-gray-500 text-sm">Share:</span>
+        <a
+          href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.data.title)}&url=${encodeURIComponent(Astro.url.href)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-9 h-9 rounded-lg bg-slate-700/50 flex items-center justify-center text-gray-400 hover:text-white hover:bg-slate-700 transition-colors"
+          aria-label="Share on Twitter"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a
+          href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(Astro.url.href)}&title=${encodeURIComponent(post.data.title)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-9 h-9 rounded-lg bg-slate-700/50 flex items-center justify-center text-gray-400 hover:text-white hover:bg-slate-700 transition-colors"
+          aria-label="Share on LinkedIn"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+        </a>
+      </div>
     </div>
-    
+
     <!-- Comments Section -->
-    <Comments />
+    <div class="mt-12">
+      <Comments />
+    </div>
   </article>
 </Layout>

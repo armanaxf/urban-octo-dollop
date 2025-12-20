@@ -5,43 +5,68 @@ export default {
     theme: {
         extend: {
             colors: {
+                // New dark slate palette (inspired by the reference design)
+                slate: {
+                    950: '#0f0f17',
+                    900: '#13131d',
+                    850: '#181824',
+                    800: '#1e1e2e',
+                    750: '#232334',
+                    700: '#2a2a3d',
+                    600: '#363649',
+                    500: '#4a4a5e',
+                },
+                // Amber/Gold accent color
+                amber: {
+                    DEFAULT: '#e5a03b',
+                    50: '#fef9ec',
+                    100: '#fcefc9',
+                    200: '#f9de8e',
+                    300: '#f5c854',
+                    400: '#f2b42a',
+                    500: '#e5a03b',
+                    600: '#ca7a14',
+                    700: '#a85814',
+                    800: '#894517',
+                    900: '#713916',
+                },
+                // Keep some legacy colors for compatibility
                 dark: {
-                    900: '#0a0e1a',
-                    800: '#0f1419',
-                    700: '#1a1f2e',
-                    600: '#252b3d',
+                    900: '#0f0f17',
+                    800: '#1e1e2e',
+                    700: '#2a2a3d',
+                    600: '#363649',
                 },
                 primary: {
-                    // Based on #5B4B6F
-                    900: '#3a2f4a',
-                    800: '#4a3d5c',
-                    700: '#5B4B6F', // Your primary color
-                    600: '#6f5d85',
-                    500: '#8370a0',
-                    400: '#9d8fb5',
-                    300: '#b8adca',
-                    200: '#d3cce0',
-                    100: '#eeeaf5',
+                    DEFAULT: '#e5a03b',
+                    900: '#713916',
+                    800: '#894517',
+                    700: '#a85814',
+                    600: '#ca7a14',
+                    500: '#e5a03b',
+                    400: '#f2b42a',
+                    300: '#f5c854',
+                    200: '#f9de8e',
+                    100: '#fef9ec',
                 },
-                accent: {
-                    purple: '#5B4B6F', // Your primary color
-                    light: '#8370a0',  // Lighter variant
-                    dark: '#3a2f4a',   // Darker variant
-                    500: '#8370a0',
-                    600: '#6f5d85',
-                }
+            },
+            fontFamily: {
+                sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                display: ['Inter', 'system-ui', 'sans-serif'],
             },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                'gradient-dark': 'linear-gradient(to bottom right, #0a0e1a, #1a1f2e, #252b3d)',
-                'gradient-primary': 'linear-gradient(to right, #5B4B6F, #8370a0, #b8adca)',
-                'gradient-accent': 'linear-gradient(to right, #5B4B6F, #8370a0, #b8adca)',
+                'gradient-dark': 'linear-gradient(135deg, #13131d 0%, #1e1e2e 50%, #232334 100%)',
+                'gradient-amber': 'linear-gradient(135deg, #e5a03b 0%, #f2b42a 50%, #f5c854 100%)',
+                'gradient-card': 'linear-gradient(145deg, #1e1e2e 0%, #232334 100%)',
             },
             animation: {
                 'fade-in': 'fadeIn 0.6s ease-out',
                 'slide-up': 'slideUp 0.6s ease-out',
+                'slide-in-left': 'slideInLeft 0.6s ease-out',
                 'gradient-shift': 'gradientShift 8s ease infinite',
-                'blob': 'blob 7s infinite',
+                'float': 'float 6s ease-in-out infinite',
+                'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             },
             keyframes: {
                 fadeIn: {
@@ -52,36 +77,38 @@ export default {
                     '0%': { transform: 'translateY(20px)', opacity: '0' },
                     '100%': { transform: 'translateY(0)', opacity: '1' },
                 },
+                slideInLeft: {
+                    '0%': { transform: 'translateX(-20px)', opacity: '0' },
+                    '100%': { transform: 'translateX(0)', opacity: '1' },
+                },
                 gradientShift: {
                     '0%, 100%': { backgroundPosition: '0% 50%' },
                     '50%': { backgroundPosition: '100% 50%' },
                 },
-                blob: {
-                    '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                    '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                    '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                    '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                float: {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-10px)' },
                 },
             },
             typography: {
                 DEFAULT: {
                     css: {
                         maxWidth: '700px',
-                        color: '#374151', // dark gray for light mode
+                        color: '#9ca3af',
                         a: {
-                            color: '#5B4B6F', // primary color
+                            color: '#e5a03b',
                             '&:hover': {
-                                color: '#8370a0', // lighter variant on hover
+                                color: '#f2b42a',
                             },
                         },
-                        h1: { color: '#111827' },
-                        h2: { color: '#111827' },
-                        h3: { color: '#111827' },
-                        h4: { color: '#111827' },
-                        strong: { color: '#111827' },
+                        h1: { color: '#f9fafb' },
+                        h2: { color: '#f9fafb' },
+                        h3: { color: '#f3f4f6' },
+                        h4: { color: '#f3f4f6' },
+                        strong: { color: '#f9fafb' },
                         code: {
-                            color: '#5B4B6F',
-                            backgroundColor: '#f3f4f6',
+                            color: '#e5a03b',
+                            backgroundColor: '#2a2a3d',
                             padding: '0.2em 0.4em',
                             borderRadius: '0.25rem',
                             fontWeight: '600',
@@ -93,18 +120,31 @@ export default {
                             content: '""'
                         },
                         blockquote: {
-                            color: '#4b5563',
-                            borderLeftColor: '#5B4B6F',
+                            color: '#d1d5db',
+                            borderLeftColor: '#e5a03b',
+                        },
+                        hr: {
+                            borderColor: '#363649',
+                        },
+                        'ul > li::marker': {
+                            color: '#e5a03b',
+                        },
+                        'ol > li::marker': {
+                            color: '#e5a03b',
+                        },
+                        pre: {
+                            backgroundColor: '#13131d',
+                            borderRadius: '0.5rem',
                         },
                     },
                 },
                 invert: {
                     css: {
-                        color: '#e5e7eb', // light gray for dark mode
+                        color: '#9ca3af',
                         a: {
-                            color: '#b8adca', // lighter primary for dark mode
+                            color: '#e5a03b',
                             '&:hover': {
-                                color: '#d3cce0',
+                                color: '#f2b42a',
                             },
                         },
                         h1: { color: '#f9fafb' },
@@ -113,21 +153,21 @@ export default {
                         h4: { color: '#f3f4f6' },
                         strong: { color: '#f9fafb' },
                         code: {
-                            color: '#b8adca',
-                            backgroundColor: '#252b3d',
+                            color: '#e5a03b',
+                            backgroundColor: '#2a2a3d',
                         },
                         blockquote: {
                             color: '#d1d5db',
-                            borderLeftColor: '#8370a0',
+                            borderLeftColor: '#e5a03b',
                         },
                         hr: {
-                            borderColor: '#374151',
+                            borderColor: '#363649',
                         },
                         'ul > li::marker': {
-                            color: '#9ca3af',
+                            color: '#e5a03b',
                         },
                         'ol > li::marker': {
-                            color: '#9ca3af',
+                            color: '#e5a03b',
                         },
                     },
                 },

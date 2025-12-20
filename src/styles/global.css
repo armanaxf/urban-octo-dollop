@@ -5,44 +5,137 @@
 @layer base {
   :root {
     --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --color-amber: #e5a03b;
+    --color-slate-800: #1e1e2e;
+    --color-slate-900: #13131d;
   }
-  
+
   html {
     font-family: var(--font-sans);
     scroll-behavior: smooth;
   }
 
+  /* Always dark mode - freelancer aesthetic */
   body {
-    @apply bg-gray-50 text-gray-900 dark:bg-dark-900 dark:text-gray-100 transition-colors duration-300;
+    @apply bg-slate-900 text-gray-300 transition-colors duration-300;
+  }
+
+  /* Custom scrollbar for dark theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-600 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-500;
+  }
+
+  /* Selection color */
+  ::selection {
+    @apply bg-amber-500/30 text-amber-100;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply px-6 py-2 bg-gradient-brand text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-primary-700/30 transition-all duration-300 transform hover:-translate-y-0.5;
+    @apply px-6 py-3 bg-amber-500 text-slate-900 font-semibold rounded-lg hover:bg-amber-400 transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg hover:shadow-amber-500/25;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-transparent text-gray-300 font-semibold rounded-lg border border-slate-600 hover:border-amber-500 hover:text-amber-500 transition-all duration-300;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 text-gray-400 hover:text-amber-500 transition-colors duration-300;
   }
 
   .card {
-    @apply bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-all duration-300;
+    @apply bg-slate-800 rounded-xl border border-slate-700/50 shadow-lg transition-all duration-300 hover:border-slate-600;
+  }
+
+  .card-hover {
+    @apply hover:shadow-xl hover:shadow-amber-500/5 hover:-translate-y-1;
+  }
+
+  .section-label {
+    @apply text-xs uppercase tracking-widest text-gray-500 font-medium mb-2;
+  }
+
+  .heading-display {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight;
+  }
+
+  .text-amber-link {
+    @apply text-amber-500 hover:text-amber-400 transition-colors duration-200 inline-flex items-center gap-1;
+  }
+
+  .nav-link {
+    @apply text-gray-400 hover:text-white transition-colors duration-200 text-sm font-medium;
+  }
+
+  .nav-link-active {
+    @apply text-amber-500;
+  }
+
+  /* Service card style from reference */
+  .service-card {
+    @apply bg-slate-800 border border-slate-700/50 rounded-xl p-6 transition-all duration-300 hover:border-amber-500/50 group;
+  }
+
+  .service-card-featured {
+    @apply bg-amber-500 text-slate-900 border-amber-500;
+  }
+
+  /* Stats styling */
+  .stat-number {
+    @apply text-4xl md:text-5xl font-bold text-amber-500;
+  }
+
+  .stat-label {
+    @apply text-sm text-gray-500 uppercase tracking-wide;
   }
 }
 
 @layer utilities {
   .bg-gradient-brand {
-    @apply bg-gradient-to-r from-primary-600 to-accent-600;
-  }
-  
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-accent-600;
+    @apply bg-gradient-to-r from-amber-500 to-amber-400;
   }
 
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-amber-300;
+  }
+
+  .text-gradient-white {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400;
+  }
+
+  /* Animation utilities */
   .animate-fade-in {
     animation: fadeIn 0.5s ease-out forwards;
   }
-  
+
   .animate-slide-up {
     animation: slideUp 0.6s ease-out forwards;
   }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+  }
+
+  /* Staggered animation delays */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
 
   @keyframes fadeIn {
     from { opacity: 0; }
@@ -52,5 +145,19 @@
   @keyframes slideUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Glow effects */
+  .glow-amber {
+    box-shadow: 0 0 40px rgba(229, 160, 59, 0.15);
+  }
+
+  .glow-amber-strong {
+    box-shadow: 0 0 60px rgba(229, 160, 59, 0.25);
   }
 }
