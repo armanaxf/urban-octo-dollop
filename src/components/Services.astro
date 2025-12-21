@@ -1,0 +1,127 @@
+---
+// Services section - inspired by the reference design
+const services = [
+  {
+    icon: 'brain',
+    title: 'AI Development',
+    description: 'Custom AI solutions, machine learning models, and intelligent automation systems.',
+    projects: 'Featured',
+    featured: true,
+  },
+  {
+    icon: 'chat',
+    title: 'Consultancy',
+    description: 'Strategic guidance on technology adoption, digital transformation, and AI integration.',
+    projects: null,
+    featured: false,
+  },
+  {
+    icon: 'code',
+    title: 'Full Stack Development',
+    description: 'End-to-end web applications, APIs, and scalable cloud infrastructure.',
+    projects: null,
+    featured: false,
+  },
+];
+---
+
+<section id="services" class="py-20 bg-slate-900">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+    <!-- Section Header -->
+    <div class="mb-12">
+      <p class="section-label flex items-center gap-2 mb-4">
+        <span class="w-4 h-px bg-gray-600"></span>
+        Contact
+      </p>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-semibold text-white mb-4">
+            Any Type Of Query & Discussion.
+          </h2>
+          <p class="text-gray-400 leading-relaxed">
+            Looking to leverage AI for your business or need expert consultation on your next project?
+          </p>
+          <a href="mailto:hello@joshgiles.dev" class="text-amber-link font-medium mt-4 inline-flex">
+            hello@joshgiles.dev
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+        <div>
+          <blockquote class="text-xl sm:text-2xl font-medium text-white italic leading-relaxed">
+            "You can't use up creativity, the more you use, more you have in your significant mind."
+          </blockquote>
+          <p class="text-gray-500 mt-4 text-sm">
+            Building intelligent solutions that make a difference.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service Cards -->
+    <div class="grid md:grid-cols-3 gap-6 mt-16">
+      {services.map((service, index) => (
+        <div
+          class={`rounded-xl p-6 transition-all duration-300 group ${
+            service.featured
+              ? 'bg-amber-500 text-slate-900'
+              : 'bg-slate-800 border border-slate-700/50 hover:border-amber-500/50'
+          }`}
+          style={`animation: slideUp 0.6s ease-out ${index * 100}ms backwards`}
+        >
+          <!-- Icon -->
+          <div class={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
+            service.featured ? 'bg-slate-900/20' : 'bg-slate-700/50'
+          }`}>
+            {service.icon === 'brain' && (
+              <svg class={`w-6 h-6 ${service.featured ? 'text-slate-900' : 'text-amber-500'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+            )}
+            {service.icon === 'chat' && (
+              <svg class={`w-6 h-6 ${service.featured ? 'text-slate-900' : 'text-amber-500'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            )}
+            {service.icon === 'code' && (
+              <svg class={`w-6 h-6 ${service.featured ? 'text-slate-900' : 'text-amber-500'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+            )}
+          </div>
+
+          <!-- Title -->
+          <h3 class={`text-xl font-semibold mb-2 ${service.featured ? 'text-slate-900' : 'text-white'}`}>
+            {service.title}<span class={service.featured ? 'text-slate-900' : 'text-amber-500'}>.</span>
+          </h3>
+
+          <!-- Description -->
+          <p class={`text-sm leading-relaxed ${service.featured ? 'text-slate-800' : 'text-gray-400'}`}>
+            {service.description}
+          </p>
+
+          <!-- Projects badge -->
+          {service.projects && (
+            <p class={`mt-4 text-sm font-medium ${service.featured ? 'text-slate-700' : 'text-gray-500'}`}>
+              {service.projects}
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
