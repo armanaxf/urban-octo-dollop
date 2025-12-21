@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: armanaxf/urban-octo-dollop
   branch: main
 
 # Enable editorial workflow for drafts
@@ -12,9 +13,6 @@ public_folder: "/blog-images"
 # Site URL for previews
 site_url: https://example.com
 display_url: https://example.com
-
-# Logo for admin UI (optional)
-# logo_url: /logo.svg
 
 collections:
   - name: "posts"
