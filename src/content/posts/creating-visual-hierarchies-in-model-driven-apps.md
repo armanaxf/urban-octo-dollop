@@ -1,11 +1,13 @@
 ---
 title: "Creating visual hierarchies in model-driven apps"
-description: "Sometimes model-driven apps can be considered quite boring due to their predictability in how the interface is presented. Personally I love the interface and the simplicity it can offer(if configured correctly!). Adding visual elements to your model-driven apps can greatly enhance the user experience and improve adoption."
-date: 2024-04-25
+description: "Sometimes model-driven apps can be considered quite boring due to their predictability in how the interface is presented. Adding visual elements to your model-driven apps can greatly enhance the user experience and improve adoption."
+date: "2024-02-19"
+image: "/blog-images/photo-1544965412-3992c4853546"
 tags: ["Power Platform", "Model-Drive Apps", "Dataverse"]
+draft: false
 ---
 
-Sometimes model-driven apps can be considered quite "boring" due to their predictability in how the interface is presented. Personally I love the interface and the simplicity it can offer(if configured correctly!).
+Sometimes model-driven apps can be considered quite “boring” due to their predictability in how the interface is presented. Personally I love the interface and the simplicity it can offer(if configured correctly!).
 
 Adding visual elements to your model-driven apps can greatly enhance the user experience and improve adoption.
 
@@ -13,9 +15,25 @@ Setting up hierarchy is a great example of adding a visual element to your apps 
 
 ## Create the Hierarchy
 
-Setting up hierarchy on tables requires a few steps, some of which aren't clear when reading the documentation. ([Here for reference](https://learn.microsoft.com/en-us/power-apps/maker/data-platform/define-query-hierarchical-data)).
+Setting up hierarchy on tables requires a few steps, some of which aren’t clear when reading the documentation. ([Here for reference](https://learn.microsoft.com/en-us/power-apps/maker/data-platform/define-query-hierarchical-data)).
 
 In this example we'll create a table called Users, and add the following column types:
+
+Column Name
+
+Column Type
+
+Name
+
+Text
+
+Email
+
+Text(Email)
+
+Manager
+
+Lookup
 
 The Manager Lookup is configured to lookup to the same(Users) table. This is a self referencing relationship which we can configure hierarchy for.
 

@@ -1,8 +1,10 @@
 ---
 title: "Create editable grids in Power Pages without using code"
 description: "Learn how to create editable grids in Power Pages using the out-of-the-box Editable Grid control and add it to your List."
-pubDate: "2023-05-03"
-heroImage: "/blog-images/photo-1581273154768-0a9a16887d2a"
+date: "2023-05-03"
+image: "/blog-images/photo-1581273154768-0a9a16887d2a"
+tags: []
+draft: false
 ---
 
 ## Introduction

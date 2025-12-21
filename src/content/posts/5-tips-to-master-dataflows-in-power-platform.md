@@ -1,8 +1,9 @@
 ---
 title: "5 tips to master dataflows in Power Platform"
 description: "Dataflows are a great tool to learn in Power Platform. They feel often forgotten, but are a fantastic way to bring data in to Dataverse solutions and transform and shape the data before it reaches your table."
-date: 2024-02-10
-tags: ["Power Platform", "Dataflows", "Dataverse", "Power Query"]
+date: "2024-04-09"
+tags: []
+draft: false
 ---
 
 Dataflows are a great tool to learn in Power Platform. They feel often forgotten, but are a fantastic way to bring data in to Dataverse solutions and transform and shape the data before it reaches your table.
@@ -11,17 +12,23 @@ If you are aren't using Dataflows to bring data into Dataverse, then seriously c
 
 I've compiled 5 tips which will help answer any questions you may have when starting to build dataflows, and hopefully leave you thinking about using them more and relying less on other solutions to do something Dataflows excel at!
 
+![](/blog-images/teach-you-yoda.gif)
+
 ## Tip 1: Choices and Lookups
 
 You can map data to Choices and Lookups using Dataflows. Oftentimes Dataflows won't be considered as people don't realise that you can map choices and lookups. For choices, you will need to make sure your values from your datasource match the Choice values (not labels!) in Dataverse so that they can migrate across seamlessly. Using the Power of the Conditional Column action in Power Query, you can transform your option choices to match the values in Dataverse. Yay!
 
-To import Lookup values, configure an alternate key on your lookup table (see here for how to do that if unsure: [https://learn.microsoft.com/en-us/power-apps/maker/data-platform/define-alternate-keys-reference-records](https://learn.microsoft.com/en-us/power-apps/maker/data-platform/define-alternate-keys-reference-records)). Side note: If you're not using alternate keys in your solutions, why not? They offer performance advantages and make working with relationships/data imports easier!
+Conditional columns are awesome in Power Query, check them out.
 
-Once your key is set up, that's it. When you go to map your columns, you will be able to map to the lookup column, and provided the value exists in the Dataverse table, it will import without a hitch. "But I don't have my lookup values in the table yet!" Just use a separate Dataflow to extract all the values you need into the table, simple!
+To import Lookup values, configure an alternate key on your lookup table (see here for how to do that if unsure: [https://learn.microsoft.com/en-us/power-apps/maker/data-platform/define-alternate-keys-reference-records](https://learn.microsoft.com/en-us/power-apps/maker/data-platform/define-alternate-keys-reference-records)). **Side note: If you're not using alternate keys in your solutions, why not? They offer performance advantages and make working with relationships/data imports easier!**
+
+Once your key is set up, that's it. When you go to map your columns, you will be able to map to the lookup column, and provided the value exists in the Dataverse table, it will import without a hitch. "**But I don't have my lookup values in the table yet!"** Just use a separate Dataflow to extract all the values you need into the table, simple!
 
 ## Tip 2: Keys, Keys, Keys!
 
 In case the above wasn't clear, Keys play an important part in making sure Dataflows import data smoothly and effectively they can help import lookup values, and also prevent duplicates. If you are importing data into Dataverse, Set up an alternate key to prevent duplicates and increase refresh speeds. If a Key is set on your destination table, and a record exists already, when the dataflow is run, it will pick up that a record already exists and update it instead. if it doesn't exist it will create it. Nice!
+
+![three assorted-color keys](/blog-images/photo-1561023367-50a6e054d890)
 
 ## Tip 3: Bulk Data updates/External system sync
 
@@ -40,6 +47,10 @@ This may be an obvious one to those of us that have been working in Power Platfo
 Using Solutions allows you to build your Dataflows in Development, Export them, then Import them into your target environment. You will also be able to change the data source if for example if you were using different data sources between Dev, UAT and production. (and if you don't use different segmented data sources for each stage of development, you may have bigger issues at hand).
 
 ## Tip 5: Data Transformation can be fun
+
+![](/blog-images/this-is.gif)
+
+Dealing with customer data can really feel like this sometimes. Power Query can help.
 
 Dataflows are extremely powerful in transforming data using Power Query. Learning how to merge queries together, combine queries, change column types, group columns, split columns, etc, all provide a really flexible approach to ensuring the data you import into Dataverse is consistent, structured and simple.
 

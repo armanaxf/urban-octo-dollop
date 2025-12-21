@@ -1,7 +1,9 @@
 ---
 title: "About me"
-description: ""
-pubDate: "2024-01-24"
+description: "Hello! I'm Josh, a Power Platform Solution Architect from Scotland. I created my blog as a place where I can write about cool and interesting things I find whilst working on Power Platform Projects."
+date: "2024-01-24"
+tags: []
+draft: false
 ---
 
 Hello!
