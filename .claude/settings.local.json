@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git fetch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git pull:*)",
+      "Bash(if not exist \"C:\\\\Users\\\\joshg\\\\sourcecode\" mkdir \"C:\\\\Users\\\\joshg\\\\sourcecode\")",
+      "Bash(xcopy:*)",
+      "Bash(git stash:*)",
+      "Bash(rsync:*)",
+      "Bash(npm run dev:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(npm install:*)",
+      "Bash(node:*)",
+      "Bash(move convert-ghost-to-astro.js convert-ghost-to-astro.cjs)",
+      "Bash(ls:*)",
+      "Bash(npm run build:*)",
+      "Bash(pkill:*)",
+      "Bash(taskkill:*)",
+      "Bash(npx astro --version)",
+      "Bash(cat:*)"
+    ]
+  }
+}
