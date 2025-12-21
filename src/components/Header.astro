@@ -11,9 +11,9 @@ const navItems = [
 <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-warm-200/50">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between max-w-6xl">
     <!-- Logo - Script font style -->
-    <a href="/" class="flex items-center gap-2 group">
+    <a href="/" class="flex items-center gap-2 group min-h-[44px]" aria-label="Josh Giles - Home">
       <span class="font-script text-3xl text-warm-900 group-hover:text-coral-500 transition-colors duration-300">
-        Josh
+        Josh Giles
       </span>
     </a>
 
@@ -38,9 +38,10 @@ const navItems = [
     <div class="hidden md:flex items-center gap-4">
       <a
         href="tel:+441234567890"
-        class="text-sm text-warm-600 hover:text-coral-500 transition-colors flex items-center gap-2"
+        class="text-sm text-warm-600 hover:text-coral-500 transition-colors flex items-center gap-2 min-h-[44px] py-2"
+        aria-label="Call us"
       >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
         </svg>
         <span class="hidden lg:inline">Get in touch</span>
@@ -50,10 +51,11 @@ const navItems = [
     <!-- Mobile Menu Button -->
     <button
       id="mobile-menu-btn"
-      class="md:hidden p-2 rounded-lg text-warm-600 hover:text-coral-500 hover:bg-coral-50 transition-colors focus:outline-none focus:ring-2 focus:ring-coral-500/50"
+      class="md:hidden p-3 rounded-lg text-warm-600 hover:text-coral-500 hover:bg-coral-50 transition-colors focus:outline-none focus:ring-2 focus:ring-coral-500 min-w-[44px] min-h-[44px]"
       aria-label="Toggle menu"
+      aria-expanded="false"
     >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     </button>

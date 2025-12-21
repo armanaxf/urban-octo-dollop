@@ -44,6 +44,25 @@
   ::selection {
     @apply bg-coral-200 text-coral-900;
   }
+
+  /* Focus indicators for accessibility */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    @apply outline-2 outline-offset-2 outline-coral-500 rounded-sm;
+  }
+
+  /* Remove default focus styles only when focus-visible is supported */
+  a:focus:not(:focus-visible),
+  button:focus:not(:focus-visible),
+  input:focus:not(:focus-visible),
+  select:focus:not(:focus-visible),
+  textarea:focus:not(:focus-visible) {
+    outline: none;
+  }
 }
 
 @layer components {
@@ -80,16 +99,16 @@
 
   /* Links */
   .text-coral-link {
-    @apply text-coral-500 hover:text-coral-600 transition-colors duration-200 inline-flex items-center gap-1 font-medium;
+    @apply text-coral-600 hover:text-coral-700 transition-colors duration-200 inline-flex items-center gap-1 font-medium;
   }
 
   /* Navigation */
   .nav-link {
-    @apply text-warm-600 hover:text-coral-500 transition-colors duration-200 text-sm font-medium;
+    @apply text-warm-700 hover:text-coral-600 transition-colors duration-200 text-sm font-medium;
   }
 
   .nav-link-active {
-    @apply text-coral-500;
+    @apply text-coral-600;
   }
 
   /* Service card - vertical style */
