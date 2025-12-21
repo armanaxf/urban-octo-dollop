@@ -1,0 +1,71 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Enable editorial workflow for drafts
+publish_mode: editorial_workflow
+
+# Media settings
+media_folder: "public/blog-images"
+public_folder: "/blog-images"
+
+# Site URL for previews
+site_url: https://example.com
+display_url: https://example.com
+
+# Logo for admin UI (optional)
+# logo_url: /logo.svg
+
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "src/content/posts"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+        required: true
+
+      - label: "Description"
+        name: "description"
+        widget: "text"
+        required: true
+
+      - label: "Publish Date"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        required: true
+
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        allow_add: true
+        default: []
+        field:
+          label: "Tag"
+          name: "tag"
+          widget: "string"
+
+      - label: "Featured Image"
+        name: "image"
+        widget: "image"
+        required: false
+        media_folder: "/public/blog-images"
+        public_folder: "/blog-images"
+
+      - label: "Draft"
+        name: "draft"
+        widget: "boolean"
+        default: true
+        hint: "Set to false when ready to publish"
+
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
