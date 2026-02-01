@@ -1,0 +1,22 @@
+name = "josh-giles-blog"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = ".svelte-kit/cloudflare"
+
+# D1 Database for posts
+[[d1_databases]]
+binding = "DB"
+database_name = "blog-posts"
+database_id = "" # Fill in after creating: wrangler d1 create blog-posts
+
+# R2 Bucket for images
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "blog-images"
+
+# KV Namespace for sessions
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "" # Fill in after creating: wrangler kv:namespace create SESSIONS
+
+[vars]
+SITE_URL = "https://joshgiles.dev"

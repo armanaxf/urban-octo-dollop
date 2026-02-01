@@ -4,19 +4,23 @@
 
     let { data }: { data: PageData } = $props();
 
-    $effect(() => {
-        // Re-render when page changes
-    });
+    function formatDate(dateString: string): string {
+        return new Date(dateString).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        });
+    }
 </script>
 
 <svelte:head>
-    <title>{data.post.data.title} | Josh Giles</title>
-    <meta name="description" content={data.post.data.description} />
-    <meta property="og:title" content={data.post.data.title} />
-    <meta property="og:description" content={data.post.data.description} />
+    <title>{data.post.title} | Josh Giles</title>
+    <meta name="description" content={data.post.description} />
+    <meta property="og:title" content={data.post.title} />
+    <meta property="og:description" content={data.post.description} />
     <meta property="og:type" content="article" />
-    {#if data.post.data.image}
-        <meta property="og:image" content={data.post.data.image} />
+    {#if data.post.image_url}
+        <meta property="og:image" content={data.post.image_url} />
     {/if}
 </svelte:head>
 
@@ -34,11 +38,11 @@
         </a>
 
         <!-- Hero Image -->
-        {#if data.post.data.image}
+        {#if data.post.image_url}
             <div class="mb-8 rounded-2xl overflow-hidden">
                 <img
-                    src={data.post.data.image}
-                    alt={data.post.data.title}
+                    src={data.post.image_url}
+                    alt={data.post.title}
                     class="w-full h-64 md:h-96 object-cover"
                 />
             </div>
@@ -47,24 +51,23 @@
         <!-- Header -->
         <header class="mb-10">
             <div class="flex items-center gap-3 text-sm text-warm-500 mb-4">
-                <time datetime={data.post.data.date.toISOString()}>
-                    {data.post.data.date.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                    })}
+                <time datetime={data.post.published_at ?? data.post.created_at}>
+                    {formatDate(data.post.published_at ?? data.post.created_at)}
                 </time>
+                {#if !data.post.published}
+                    <span class="px-2 py-0.5 text-xs font-medium rounded-full bg-amber-100 text-amber-700">Draft</span>
+                {/if}
             </div>
 
             <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-warm-900 mb-6 leading-tight">
-                {data.post.data.title}
+                {data.post.title}
             </h1>
 
             <!-- Tags -->
             <div class="flex flex-wrap gap-2">
-                {#each data.post.data.tags as tag}
+                {#each data.post.tags as tag}
                     <span class="text-xs px-3 py-1 rounded-full bg-coral-50 text-coral-500 border border-coral-200">
-                        #{tag}
+                        #{tag.name}
                     </span>
                 {/each}
             </div>
@@ -92,7 +95,7 @@
             <div class="flex items-center gap-4">
                 <span class="text-warm-500 text-sm">Share:</span>
                 <a
-                    href="https://twitter.com/intent/tweet?text={encodeURIComponent(data.post.data.title)}&url={encodeURIComponent($page.url.href)}"
+                    href="https://twitter.com/intent/tweet?text={encodeURIComponent(data.post.title)}&url={encodeURIComponent($page.url.href)}"
                     target="_blank"
                     rel="noopener noreferrer"
                     class="w-9 h-9 rounded-full bg-warm-100 flex items-center justify-center text-warm-500 hover:text-white hover:bg-coral-500 transition-all"
@@ -103,7 +106,7 @@
                     </svg>
                 </a>
                 <a
-                    href="https://www.linkedin.com/shareArticle?mini=true&url={encodeURIComponent($page.url.href)}&title={encodeURIComponent(data.post.data.title)}"
+                    href="https://www.linkedin.com/shareArticle?mini=true&url={encodeURIComponent($page.url.href)}&title={encodeURIComponent(data.post.title)}"
                     target="_blank"
                     rel="noopener noreferrer"
                     class="w-9 h-9 rounded-full bg-warm-100 flex items-center justify-center text-warm-500 hover:text-white hover:bg-coral-500 transition-all"

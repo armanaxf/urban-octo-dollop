@@ -2,6 +2,14 @@
     import type { PageData } from './$types';
 
     let { data }: { data: PageData } = $props();
+
+    function formatDate(dateString: string): string {
+        return new Date(dateString).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        });
+    }
 </script>
 
 <svelte:head>
@@ -30,11 +38,11 @@
                 >
                     <a href="/posts/{post.slug}" class="flex flex-col md:flex-row">
                         <!-- Image -->
-                        {#if post.data.image}
+                        {#if post.image_url}
                             <div class="md:w-64 lg:w-80 h-48 md:h-auto shrink-0 overflow-hidden">
                                 <img
-                                    src={post.data.image}
-                                    alt={post.data.title}
+                                    src={post.image_url}
+                                    alt={post.title}
                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                 />
                             </div>
@@ -50,30 +58,26 @@
                         <div class="flex-1 p-6">
                             <div class="flex items-center gap-3 mb-3">
                                 <time
-                                    datetime={post.data.date.toISOString()}
+                                    datetime={post.published_at ?? post.created_at}
                                     class="text-sm text-warm-500"
                                 >
-                                    {post.data.date.toLocaleDateString('en-US', {
-                                        year: 'numeric',
-                                        month: 'short',
-                                        day: 'numeric',
-                                    })}
+                                    {formatDate(post.published_at ?? post.created_at)}
                                 </time>
                             </div>
 
                             <h2 class="text-xl md:text-2xl font-semibold text-warm-900 group-hover:text-coral-500 transition-colors mb-3">
-                                {post.data.title}
+                                {post.title}
                             </h2>
 
                             <p class="text-warm-500 mb-4 line-clamp-2">
-                                {post.data.description}
+                                {post.description}
                             </p>
 
                             <!-- Tags -->
                             <div class="flex flex-wrap gap-2">
-                                {#each post.data.tags as tag}
+                                {#each post.tags as tag}
                                     <span class="text-xs px-3 py-1 rounded-full bg-coral-50 text-coral-500 border border-coral-200">
-                                        #{tag}
+                                        #{tag.name}
                                     </span>
                                 {/each}
                             </div>

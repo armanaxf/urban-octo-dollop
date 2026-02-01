@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import { getPublishedPosts } from '$lib/server/db';
+import { getAllPosts } from '$lib/server/db';
 import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ platform }) => {
@@ -7,7 +7,7 @@ export const load: PageServerLoad = async ({ platform }) => {
         throw error(500, 'Database not configured');
     }
 
-    const posts = await getPublishedPosts(platform.env.DB);
+    const posts = await getAllPosts(platform.env.DB);
 
     return {
         posts
