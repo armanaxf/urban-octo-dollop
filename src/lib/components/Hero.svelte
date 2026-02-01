@@ -1,0 +1,157 @@
+<script lang="ts">
+    // Hero section - Friendly light freelancer style (Binjan-inspired)
+</script>
+
+<section class="relative w-full min-h-[85vh] flex items-center bg-white overflow-hidden">
+    <!-- Decorative brush stroke background -->
+    <div class="absolute top-1/4 -left-20 w-96 h-96 bg-coral-100 rounded-full blur-3xl opacity-60"></div>
+    <div class="absolute bottom-1/4 -right-20 w-80 h-80 bg-coral-50 rounded-full blur-3xl opacity-60"></div>
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+            <!-- Left Column - Introduction -->
+            <div class="order-2 lg:order-1 animate-fade-in">
+                <!-- Email link -->
+                <a href="mailto:hello@joshgiles.dev" class="text-coral-500 text-sm font-medium mb-6 inline-block hover:text-coral-600 transition-colors min-h-[44px] py-2" aria-label="Email hello@joshgiles.dev">
+                    hello@joshgiles.dev
+                </a>
+
+                <!-- Main Heading -->
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-warm-900 mb-6 leading-[1.1]">
+                    Hey There,
+                    <br />
+                    <span class="relative inline-block">
+                        I'm Josh
+                        <!-- Brush stroke underline -->
+                        <svg class="absolute -bottom-2 left-0 w-full h-4" viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true">
+                            <path d="M0 15 Q50 5 100 15 T200 10" stroke="#FFD9C7" stroke-width="8" fill="none" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                </h1>
+
+                <!-- Tagline -->
+                <p class="text-lg text-warm-600 leading-relaxed mb-8 max-w-md">
+                    I design beautifully simple things. And I love what I do.
+                </p>
+
+                <!-- Experience Badge -->
+                <div class="flex items-center gap-6">
+                    <div class="text-center">
+                        <span class="block text-4xl font-bold text-warm-900">5+</span>
+                        <span class="text-xs text-warm-500 uppercase tracking-wide">Years<br/>Experience</span>
+                    </div>
+
+                    <!-- Certification badge placeholder -->
+                    <div class="flex items-center gap-3 px-4 py-2 bg-warm-50 rounded-xl" role="img" aria-label="Certified AI Developer and Consultant">
+                        <div class="w-10 h-10 rounded-full bg-coral-100 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-coral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <span class="block text-xs font-semibold text-warm-800 uppercase">AI Developer</span>
+                            <span class="block text-xs text-warm-500">& Consultant</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Photo with brush stroke -->
+            <div class="order-1 lg:order-2 flex justify-center animate-slide-up">
+                <div class="relative">
+                    <!-- Brush stroke behind photo -->
+                    <div class="absolute -inset-8 z-0" aria-hidden="true">
+                        <svg viewBox="0 0 400 400" class="w-full h-full" aria-hidden="true">
+                            <path d="M80 200 Q120 80 200 100 T320 200 T200 320 T80 200" fill="#FFD9C7" />
+                            <path d="M100 180 Q140 100 200 120 T300 180 T200 280 T100 180" fill="#FFEDE5" />
+                        </svg>
+                    </div>
+
+                    <!-- Photo placeholder -->
+                    <div class="relative z-10 w-64 h-80 sm:w-72 sm:h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-coral-100 to-coral-50 flex items-center justify-center shadow-xl" role="img" aria-label="Professional photo placeholder - coming soon">
+                        <div class="text-center p-6">
+                            <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-coral-200 flex items-center justify-center">
+                                <svg class="w-12 h-12 text-coral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            </div>
+                            <p class="text-sm text-coral-400 font-medium">Photo coming soon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section (vertical list like reference) -->
+<section class="py-12 bg-white border-t border-warm-100">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        <div class="grid lg:grid-cols-2 gap-12 items-start">
+            <!-- Services List -->
+            <div class="space-y-2">
+                <a href="#portfolio" class="service-card min-h-[60px]" aria-label="AI Development - 12 Projects">
+                    <div class="service-icon">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-warm-900 group-hover:text-coral-500 transition-colors">AI Development</h3>
+                        <p class="text-sm text-warm-500">12 Projects</p>
+                    </div>
+                </a>
+
+                <a href="#portfolio" class="service-card min-h-[60px]" aria-label="Consultancy - 8 Projects">
+                    <div class="service-icon">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-warm-900 group-hover:text-coral-500 transition-colors">Consultancy</h3>
+                        <p class="text-sm text-warm-500">8 Projects</p>
+                    </div>
+                </a>
+
+                <a href="#portfolio" class="service-card min-h-[60px]" aria-label="Full Stack Development - 15 Projects">
+                    <div class="service-icon">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-warm-900 group-hover:text-coral-500 transition-colors">Full Stack Development</h3>
+                        <p class="text-sm text-warm-500">15 Projects</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- What do I help section -->
+            <div>
+                <h2 class="text-3xl sm:text-4xl font-bold text-warm-900 mb-4">
+                    What do I help?
+                </h2>
+                <p class="text-warm-600 leading-relaxed mb-6">
+                    I will help you with finding a solution and solve your problems. I use AI and modern technology to create digital products that also help businesses grow.
+                </p>
+                <p class="text-warm-500 leading-relaxed mb-8">
+                    From intelligent automation to custom AI solutions, I bridge the gap between cutting-edge technology and practical business applications.
+                </p>
+
+                <!-- Stats -->
+                <div class="flex gap-8">
+                    <div>
+                        <span class="stat-number">35+</span>
+                        <p class="stat-label">Projects<br/>Completed</p>
+                    </div>
+                    <div>
+                        <span class="stat-number">20+</span>
+                        <p class="stat-label">Happy<br/>Clients</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

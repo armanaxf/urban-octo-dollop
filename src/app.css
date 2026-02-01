@@ -1,0 +1,228 @@
+/* Light coral freelancer theme */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  :root {
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-script: 'Caveat', cursive;
+    --color-coral: #FF914D;
+    --color-coral-light: #FFD9C7;
+    --color-warm-900: #2A2522;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+  }
+
+  /* Light mode - friendly freelancer aesthetic */
+  body {
+    @apply bg-white text-warm-800 transition-colors duration-300;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-warm-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-coral-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-coral-400;
+  }
+
+  /* Selection color */
+  ::selection {
+    @apply bg-coral-200 text-coral-900;
+  }
+
+  /* Focus indicators for accessibility */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    @apply outline-2 outline-offset-2 outline-coral-500 rounded-sm;
+  }
+
+  /* Remove default focus styles only when focus-visible is supported */
+  a:focus:not(:focus-visible),
+  button:focus:not(:focus-visible),
+  input:focus:not(:focus-visible),
+  select:focus:not(:focus-visible),
+  textarea:focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+@layer components {
+  /* Buttons */
+  .btn-primary {
+    @apply px-6 py-3 bg-coral-500 text-white font-semibold rounded-full hover:bg-coral-600 transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg hover:shadow-coral-500/25;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-transparent text-warm-800 font-semibold rounded-full border-2 border-warm-300 hover:border-coral-500 hover:text-coral-500 transition-all duration-300;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 text-warm-600 hover:text-coral-500 transition-colors duration-300;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white rounded-2xl border border-warm-200 shadow-sm transition-all duration-300 hover:shadow-md hover:border-coral-200;
+  }
+
+  .card-hover {
+    @apply hover:shadow-xl hover:shadow-coral-500/10 hover:-translate-y-1;
+  }
+
+  /* Section styling */
+  .section-label {
+    @apply text-xs uppercase tracking-widest text-warm-500 font-medium;
+  }
+
+  .heading-display {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-warm-900 leading-tight;
+  }
+
+  /* Links */
+  .text-coral-link {
+    @apply text-coral-600 hover:text-coral-700 transition-colors duration-200 inline-flex items-center gap-1 font-medium;
+  }
+
+  /* Navigation */
+  .nav-link {
+    @apply text-warm-700 hover:text-coral-600 transition-colors duration-200 text-sm font-medium;
+  }
+
+  .nav-link-active {
+    @apply text-coral-600;
+  }
+
+  /* Service card - vertical style */
+  .service-card {
+    @apply flex items-center gap-4 p-4 rounded-xl transition-all duration-300 hover:bg-coral-50;
+  }
+
+  .service-card .service-icon {
+    @apply w-12 h-12 rounded-xl flex items-center justify-center bg-coral-100 text-coral-500 transition-all duration-300;
+  }
+
+  .service-card:hover .service-icon {
+    @apply bg-coral-500 text-white;
+  }
+
+  /* Stats styling */
+  .stat-number {
+    @apply text-4xl md:text-5xl font-bold text-coral-500;
+  }
+
+  .stat-label {
+    @apply text-sm text-warm-500;
+  }
+
+  /* Brush stroke decoration */
+  .brush-stroke {
+    position: relative;
+  }
+
+  .brush-stroke::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -5%;
+    right: -5%;
+    height: 40%;
+    background: linear-gradient(90deg, transparent, #FFD9C7 20%, #FFD9C7 80%, transparent);
+    z-index: -1;
+    border-radius: 50%;
+    transform: rotate(-2deg);
+  }
+
+  /* Photo frame with brush stroke */
+  .photo-frame {
+    position: relative;
+  }
+
+  .photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 100 Q60 40 100 50 T160 100 T100 150 T40 100' fill='%23FFD9C7'/%3E%3C/svg%3E") no-repeat center;
+    background-size: contain;
+    z-index: -1;
+    transform: rotate(-5deg);
+  }
+}
+
+@layer utilities {
+  /* Gradients */
+  .bg-gradient-coral {
+    @apply bg-gradient-to-r from-coral-500 to-coral-400;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-coral-500 to-coral-600;
+  }
+
+  /* Backgrounds */
+  .bg-warm {
+    @apply bg-warm-50;
+  }
+
+  .bg-warm-alt {
+    @apply bg-warm-100;
+  }
+
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+  }
+
+  /* Staggered animation delays */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Decorative shapes */
+  .blob-coral {
+    background: radial-gradient(circle, #FFD9C7 0%, transparent 70%);
+  }
+}
