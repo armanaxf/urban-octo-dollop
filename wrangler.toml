@@ -2,13 +2,13 @@ name = "josh-giles-blog"
 compatibility_date = "2024-01-01"
 pages_build_output_dir = ".svelte-kit/cloudflare"
 
-# D1 Database for posts - uncomment after creating
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "blog-posts"
-# database_id = ""
+# D1 Database for posts
+[[d1_databases]]
+binding = "DB"
+database_name = "blog-posts"
+database_id = "1cfae5cc-2eb3-438f-ba20-c4ccdae48ea4"
 
-# R2 Bucket for images
+# R2 Bucket for images - enable R2 in dashboard first
 [[r2_buckets]]
 binding = "IMAGES"
 bucket_name = "blog-images"
