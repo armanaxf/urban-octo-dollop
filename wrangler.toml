@@ -8,15 +8,15 @@ binding = "DB"
 database_name = "blog-posts"
 database_id = "1cfae5cc-2eb3-438f-ba20-c4ccdae48ea4"
 
-# R2 Bucket for images - enable R2 in dashboard first
+# R2 Bucket for images
 [[r2_buckets]]
 binding = "IMAGES"
 bucket_name = "blog-images"
 
-# KV Namespace for sessions - uncomment after creating
-# [[kv_namespaces]]
-# binding = "SESSIONS"
-# id = ""
+# KV Namespace for sessions
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "7b778a6ef240480fb873c2c00d4546eb"
 
 [vars]
 SITE_URL = "https://joshgiles.dev"
