@@ -21,6 +21,8 @@
     {#if umamiWebsiteId}
         <script defer src={umamiScriptUrl} data-website-id={umamiWebsiteId}></script>
     {/if}
+    <!-- Buy Me a Coffee Widget -->
+    <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="joshlgiles" data-description="Support me on Buy me a coffee!" data-message="Thanks for visiting! If you found my content helpful, consider buying me a coffee" data-color="#FF914D" data-position="Right" data-x_margin="18" data-y_margin="48"></script>
 </svelte:head>
 
 <Header />
@@ -28,6 +30,3 @@
 {@render children()}
 
 <Footer />
-
-<!-- Buy Me a Coffee Widget -->
-<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="joshlgiles" data-description="Support me on Buy me a coffee!" data-message="Thanks for visiting! If you found my content helpful, consider buying me a coffee" data-color="#FF914D" data-position="Right" data-x_margin="18" data-y_margin="48"></script>
